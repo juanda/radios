@@ -18,6 +18,8 @@ Aplicación web progresiva (PWA) para escuchar emisoras de radio españolas en s
 - RNE Radio 1
 - RNE Radio 3
 - RNE Radio 5
+- Radio Clásica (RNE)
+- Radio Marca
 
 ## Requisitos
 
@@ -88,9 +90,27 @@ radios/
 
 ## Despliegue
 
-La carpeta `dist/` generada puede desplegarse en cualquier servidor de archivos estáticos:
+La carpeta `dist/` generada puede desplegarse en cualquier servidor de archivos estáticos.
 
-- GitHub Pages
+### GitHub Pages (automático)
+
+El proyecto incluye un workflow de GitHub Actions que despliega automáticamente a GitHub Pages.
+
+1. En tu repositorio, ve a **Settings > Pages**
+2. En "Build and deployment", selecciona **GitHub Actions**
+3. Ve a **Settings > Secrets and variables > Actions**
+4. Añade estos secrets con las URLs de streaming:
+   - `CADENA_SER_URL`
+   - `RNE_RADIO1_URL`
+   - `RNE_RADIO3_URL`
+   - `RNE_RADIO5_URL`
+   - `RNE_RADIOCLASICA_URL`
+   - `RADIO_MARCA_URL`
+
+5. Haz push a la rama `main` y el despliegue se ejecutará automáticamente
+
+### Otros servicios
+
 - Netlify
 - Vercel
 - Servidor Apache/Nginx

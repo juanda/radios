@@ -1,0 +1,59 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Create .env from secrets
+        run: |
+          cat << EOF > .env
+          CADENA_SER_URL=${{ secrets.CADENA_SER_URL }}
+          RNE_RADIO1_URL=${{ secrets.RNE_RADIO1_URL }}
+          RNE_RADIO3_URL=${{ secrets.RNE_RADIO3_URL }}
+          RNE_RADIO5_URL=${{ secrets.RNE_RADIO5_URL }}
+          RNE_RADIOCLASICA_URL=${{ secrets.RNE_RADIOCLASICA_URL }}
+          RADIO_MARCA_URL=${{ secrets.RADIO_MARCA_URL }}
+          EOF
+
+      - name: Build
+        run: bun run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
