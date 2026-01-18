@@ -81,32 +81,47 @@ const MIME_TYPES = {
   ".webmanifest": "application/manifest+json"
 };
 
+const BASE_PATH = "/radios";
+
 const server = Bun.serve({
   port: 3000,
   async fetch(req) {
     const url = new URL(req.url);
     let pathname = url.pathname;
 
+    // Redirigir / a /radios/
+    if (pathname === "/") {
+      return Response.redirect(`${url.origin}${BASE_PATH}/`, 302);
+    }
+
     // API endpoint para la configuración de radios
-    if (pathname === "/api/radios") {
+    if (pathname === `${BASE_PATH}/api/radios`) {
       return new Response(JSON.stringify(radiosConfig), {
         headers: { "Content-Type": "application/json" }
       });
     }
 
-    // Servir archivos estáticos
-    if (pathname === "/") {
-      pathname = "/index.html";
+    // Verificar que la ruta empiece con /radios
+    if (!pathname.startsWith(BASE_PATH)) {
+      return new Response("Not Found", { status: 404 });
     }
 
-    const filePath = join(import.meta.dir, "src", pathname);
+    // Quitar el prefijo /radios para buscar el archivo
+    let filePath = pathname.slice(BASE_PATH.length) || "/";
+
+    // Servir index.html para /radios/
+    if (filePath === "/" || filePath === "") {
+      filePath = "/index.html";
+    }
+
+    const fullPath = join(import.meta.dir, "src", filePath);
 
     try {
-      const file = Bun.file(filePath);
+      const file = Bun.file(fullPath);
       const exists = await file.exists();
 
       if (exists) {
-        const ext = pathname.substring(pathname.lastIndexOf("."));
+        const ext = filePath.substring(filePath.lastIndexOf("."));
         const contentType = MIME_TYPES[ext] || "application/octet-stream";
 
         return new Response(file, {
@@ -121,4 +136,4 @@ const server = Bun.serve({
   }
 });
 
-console.log(`🎵 Servidor de desarrollo ejecutándose en http://localhost:${server.port}`);
+console.log(`🎵 Servidor de desarrollo ejecutándose en http://localhost:${server.port}${BASE_PATH}/`);

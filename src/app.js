@@ -22,9 +22,9 @@ class RadioPlayer {
 
   async loadRadios() {
     try {
-      // En desarrollo usa /api/radios, en producción usa radios.json
+      // En desarrollo usa /radios/api/radios, en producción usa radios.json
       const isDev = window.location.hostname === "localhost";
-      const url = isDev ? "/api/radios" : "radios.json";
+      const url = isDev ? "/radios/api/radios" : "radios.json";
 
       const response = await fetch(url);
       if (!response.ok) throw new Error("Error cargando configuración");
