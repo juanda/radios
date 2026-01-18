@@ -18,6 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,15 +26,15 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Create .env from secrets
+      - name: Create .env from variables
         run: |
           cat << EOF > .env
-          CADENA_SER_URL=${{ secrets.CADENA_SER_URL }}
-          RNE_RADIO1_URL=${{ secrets.RNE_RADIO1_URL }}
-          RNE_RADIO3_URL=${{ secrets.RNE_RADIO3_URL }}
-          RNE_RADIO5_URL=${{ secrets.RNE_RADIO5_URL }}
-          RNE_RADIOCLASICA_URL=${{ secrets.RNE_RADIOCLASICA_URL }}
-          RADIO_MARCA_URL=${{ secrets.RADIO_MARCA_URL }}
+          CADENA_SER_URL=${{ vars.CADENA_SER_URL }}
+          RNE_RADIO1_URL=${{ vars.RNE_RADIO1_URL }}
+          RNE_RADIO3_URL=${{ vars.RNE_RADIO3_URL }}
+          RNE_RADIO5_URL=${{ vars.RNE_RADIO5_URL }}
+          RNE_RADIOCLASICA_URL=${{ vars.RNE_RADIOCLASICA_URL }}
+          RADIO_MARCA_URL=${{ vars.RADIO_MARCA_URL }}
           EOF
 
       - name: Build
