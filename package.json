@@ -1,0 +1,11 @@
+{
+  "name": "radios-espana",
+  "version": "1.0.0",
+  "description": "Selector de radios de España - PWA",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run server.js",
+    "build": "bun run build.js"
+  },
+  "devDependencies": {}
+}

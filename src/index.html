@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selector de radios de España - Escucha Cadena SER, RNE Radio 1, Radio 3 y Radio 5">
+  <meta name="theme-color" content="#1f2937">
+
+  <title>Radios de España</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="images/icon.svg">
+  <link rel="apple-touch-icon" href="images/icon-192.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📻 Radios de España</h1>
+      <p class="subtitle">Selecciona una emisora para escuchar</p>
+    </header>
+
+    <main id="radios-container" class="radios-grid">
+      <!-- Las cards se generan dinámicamente -->
+    </main>
+
+    <footer>
+      <div id="now-playing" class="now-playing hidden">
+        <span class="playing-indicator">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </span>
+        <span id="current-station">-</span>
+        <button id="stop-btn" class="stop-btn" aria-label="Detener reproducción">⏹</button>
+      </div>
+    </footer>
+  </div>
+
+  <audio id="audio-player" preload="none"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
