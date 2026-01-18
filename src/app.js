@@ -245,12 +245,13 @@ class RadioPlayer {
 
   updateMediaSession(radio) {
     if ("mediaSession" in navigator) {
+      const basePath = new URL(".", import.meta.url).href;
       navigator.mediaSession.metadata = new MediaMetadata({
         title: radio.name,
         artist: "En directo",
         album: "Radios de España",
         artwork: [
-          { src: radio.image, sizes: "96x96", type: "image/svg+xml" }
+          { src: new URL(radio.image, basePath).href, sizes: "96x96", type: "image/svg+xml" }
         ]
       });
     }
@@ -259,7 +260,8 @@ class RadioPlayer {
   async registerServiceWorker() {
     if ("serviceWorker" in navigator) {
       try {
-        await navigator.serviceWorker.register("sw.js");
+        const basePath = new URL(".", import.meta.url).pathname;
+        await navigator.serviceWorker.register("sw.js", { scope: basePath });
         console.log("Service Worker registrado");
       } catch (error) {
         console.log("Service Worker no registrado:", error);

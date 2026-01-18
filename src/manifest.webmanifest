@@ -2,26 +2,27 @@
   "name": "Radios de España",
   "short_name": "Radios ES",
   "description": "Selector de radios de España - Escucha Cadena SER, RNE Radio 1, Radio 3 y Radio 5",
-  "start_url": "/",
+  "start_url": "/radios/",
+  "scope": "/radios/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#1f2937",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "images/icon-192.png",
+      "src": "/radios/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "images/icon-512.png",
+      "src": "/radios/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "images/icon.svg",
+      "src": "/radios/images/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

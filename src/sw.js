@@ -1,18 +1,19 @@
-const CACHE_NAME = "radios-espana-v2";
+const CACHE_NAME = "radios-espana-v3";
+const BASE_PATH = "/radios";
 const ASSETS = [
-  "/",
-  "/index.html",
-  "/styles.css",
-  "/app.js",
-  "/manifest.webmanifest",
-  "/radios.json",
-  "/images/icon.svg",
-  "/images/cadena-ser.svg",
-  "/images/rne-radio1.svg",
-  "/images/rne-radio3.svg",
-  "/images/rne-radio5.svg",
-  "/images/rne-radioclasica.svg",
-  "/images/radio-marca.svg"
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/styles.css`,
+  `${BASE_PATH}/app.js`,
+  `${BASE_PATH}/manifest.webmanifest`,
+  `${BASE_PATH}/radios.json`,
+  `${BASE_PATH}/images/icon.svg`,
+  `${BASE_PATH}/images/cadena-ser.svg`,
+  `${BASE_PATH}/images/rne-radio1.svg`,
+  `${BASE_PATH}/images/rne-radio3.svg`,
+  `${BASE_PATH}/images/rne-radio5.svg`,
+  `${BASE_PATH}/images/rne-radioclasica.svg`,
+  `${BASE_PATH}/images/radio-marca.svg`
 ];
 
 // Instalación: cachear recursos estáticos
